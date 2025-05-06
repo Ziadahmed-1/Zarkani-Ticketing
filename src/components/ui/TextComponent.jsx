@@ -4,7 +4,7 @@ import { MdOutlineVisibility } from "react-icons/md";
 
 import React, { useState } from "react";
 
-function TextComponent({ type, value, onChange, multiline, height }) {
+function TextComponent({ type, value, onChange, multiline, height, readOnly }) {
   const [showPassword, setShowPassword] = useState(false);
   const handleTogglePassword = () => setShowPassword((prev) => !prev);
 
@@ -17,6 +17,7 @@ function TextComponent({ type, value, onChange, multiline, height }) {
     <Box noValidate autoComplete="off">
       <TextField
         value={value}
+        disabled={readOnly}
         onChange={handleChange}
         type={showPassword ? "text" : type}
         variant="outlined"

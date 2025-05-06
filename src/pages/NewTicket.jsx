@@ -18,9 +18,10 @@ function NewTicket() {
   const [previews, setPreviews] = useState([]);
   const [formData, setFormData] = useState({
     name: "",
-    email: "",
     phone: "",
     title: "",
+    project: "",
+    branch: "",
     description: "",
   });
 
@@ -77,6 +78,7 @@ function NewTicket() {
             <label>Name</label>
             <TextComponent
               type="text"
+              readOnly
               value={formData.name}
               onChange={(e) =>
                 setFormData({ ...formData, name: e.target.value })
@@ -87,6 +89,7 @@ function NewTicket() {
             <label>Phone</label>
             <TextComponent
               type="text"
+              readOnly
               value={formData.phone}
               onChange={(e) =>
                 setFormData({ ...formData, phone: e.target.value })
@@ -101,6 +104,7 @@ function NewTicket() {
             <label>Company</label>
             <TextComponent
               type="text"
+              readOnly
               value={formData.project}
               onChange={(e) =>
                 setFormData({ ...formData, project: e.target.value })
@@ -111,6 +115,7 @@ function NewTicket() {
             <label>Branch</label>
             <TextComponent
               type="text"
+              readOnly
               value={formData.branch}
               onChange={(e) =>
                 setFormData({ ...formData, branch: e.target.value })
