@@ -9,6 +9,7 @@ import Tickets from "@/pages/Tickets";
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router";
 import NewTicket from "@/pages/NewTicket";
+import AfterSubmission from "@/pages/AfterSubmission";
 function Layout() {
   return (
     <BrowserRouter>
@@ -22,6 +23,7 @@ function Layout() {
         <Route path="auth/login" element={<Login />} />
         <Route path="auth/register" element={<Register />} />
         <Route path="newTicket" element={<NewTicket />} />
+        <Route path="ticketSubmitted" element={<AfterSubmission />} />
 
         <Route path="*" element={<NotFound />} />
       </Routes>
