@@ -3,6 +3,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 import "./App.css";
 import Layout from "./Layout/Layout";
+import ErrorBoundary from "./components/ErrorBoundry";
 
 function App() {
   const queryClient = new QueryClient();
@@ -10,7 +11,9 @@ function App() {
   return (
     <>
       <QueryClientProvider client={queryClient}>
-        <Layout />
+        <ErrorBoundary>
+          <Layout />
+        </ErrorBoundary>
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </>

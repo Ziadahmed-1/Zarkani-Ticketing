@@ -15,10 +15,15 @@ function SelectComponent({ value, onChange, options }) {
         value={value}
         //label={label || "Select"}
         onChange={onChange}
-        sx={{ height: "40px", borderRadius: "10px", fontSize: "14px" }}
+        sx={{
+          height: "40px",
+          borderRadius: "10px",
+          fontSize: "14px",
+          backgroundColor: "white",
+        }}
       >
         {options?.map((option) => (
-          <MenuItem sx={{ fontSize: "14px" }} value={option}>
+          <MenuItem key={option} sx={{ fontSize: "14px" }} value={option}>
             {option}
           </MenuItem>
         ))}

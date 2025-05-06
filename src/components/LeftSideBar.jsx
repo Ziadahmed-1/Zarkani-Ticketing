@@ -5,7 +5,7 @@ import { LuTickets } from "react-icons/lu";
 import { IoSettingsOutline } from "react-icons/io5";
 import { NavLink, useLocation } from "react-router";
 
-function LeftSideBar() {
+function LeftSideBar({ isSidebarOpen }) {
   const links = [
     {
       name: "Dashboard",
@@ -46,10 +46,18 @@ function LeftSideBar() {
     return path === location.pathname ? "active" : "";
   };
   return (
-    <div className="side-bar">
+    <div
+      className={`side-bar`}
+      style={{ display: isSidebarOpen ? "" : "none" }}
+    >
       <div className="block">
         <h5>Project</h5>
         <SelectComponent options={["Z-Aviation Services", "Sky Culinaire"]} />
+      </div>
+      <hr />
+      <div className="block">
+        <h5>Branch</h5>
+        <SelectComponent options={["Al-Nsour", "Al-Alamein"]} />
       </div>
       <hr />
       <div className="block">

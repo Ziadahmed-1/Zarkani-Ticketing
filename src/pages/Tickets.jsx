@@ -1,7 +1,10 @@
 import TicketsFilterBar from "@/components/TicketsFilterBar";
 import React from "react";
+import { useNavigate } from "react-router";
 
 function Tickets() {
+  const navigate = useNavigate();
+
   const tickets = [
     {
       id: 1,
@@ -101,16 +104,19 @@ function Tickets() {
         return "#D3D3D3"; // LightGray - unknown or fallback
     }
   }
+
   return (
     <div>
       <TicketsFilterBar />
       <div className="tickets-second-header">
         <h5>8 Tickets Found</h5>
-        <button className="glb-btn">New Ticket</button>
+        <button className="glb-btn" onClick={() => navigate("/newTicket")}>
+          New Ticket
+        </button>
       </div>
       <div className="tickets-grid">
         {tickets.map((ticket) => (
-          <div className="ticket-card">
+          <div key={ticket.id} className="ticket-card">
             <div className="header">
               <h4>{ticket.title}</h4>
               <span

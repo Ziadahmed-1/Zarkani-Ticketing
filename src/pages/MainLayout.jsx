@@ -12,7 +12,7 @@ function MainLayout() {
     <aside style={{ display: "flex", flexDirection: "column" }}>
       <NavBar />
       <div style={{ display: "flex", flexDirection: "row" }}>
-        {isSidebarOpen && <LeftSideBar />}
+        <LeftSideBar isSidebarOpen={isSidebarOpen} />
         <main className="main-content">
           <Outlet />
         </main>
