@@ -2,7 +2,7 @@
 import axios from "axios";
 
 const axiosInstance = axios.create({
-  baseURL: "https://api.example.com", // Replace with your actual API URL
+  baseURL: "https://apitiketing.zarkani-group.com", // Replace with your actual API URL
   timeout: 10000,
   headers: {
     "Content-Type": "application/json",
@@ -14,7 +14,7 @@ const axiosInstance = axios.create({
 axiosInstance.interceptors.request.use(
   (config) => {
     // Add token from localStorage/session if needed
-    const token = localStorage.getItem("token");
+    const token = JSON.parse(localStorage.getItem("user"))?.encodedPayload;
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }

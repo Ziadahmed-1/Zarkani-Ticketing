@@ -21,8 +21,8 @@ function TextComponent({ type, value, onChange, multiline, height, readOnly }) {
         onChange={handleChange}
         type={showPassword ? "text" : type}
         variant="outlined"
-        multiline={multiline}
         fullWidth
+        multiline={multiline}
         minRows={2}
         maxRows={4}
         InputProps={{
@@ -32,8 +32,12 @@ function TextComponent({ type, value, onChange, multiline, height, readOnly }) {
             alignItems: "flex-start", // Ensures top alignment for textarea
           },
           endAdornment: type === "password" && (
-            <InputAdornment position="end">
-              <IconButton onClick={handleTogglePassword} edge="end">
+            <InputAdornment sx={{ m: 0, p: 0, margin: "auto" }} position="end">
+              <IconButton
+                sx={{ m: 0, p: 0 }}
+                onClick={handleTogglePassword}
+                edge="end"
+              >
                 {showPassword ? (
                   <MdOutlineVisibilityOff />
                 ) : (
@@ -47,6 +51,7 @@ function TextComponent({ type, value, onChange, multiline, height, readOnly }) {
           style: {
             padding: "10px 14px", // Sufficient padding for multiline
             backgroundColor: "white",
+            borderRadius: "10px",
           },
         }}
       />

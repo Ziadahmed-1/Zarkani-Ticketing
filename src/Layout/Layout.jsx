@@ -20,8 +20,11 @@ function Layout() {
           <Route path="settings" element={<Settings />} />
         </Route>
 
-        <Route path="auth/login" element={<Login />} />
-        <Route path="auth/register" element={<Register />} />
+        <Route path="auth" element={<AuthLayout />}>
+          <Route path="login" element={<Login />} />
+          <Route path="register" element={<Register />} />
+        </Route>
+
         <Route path="newTicket" element={<NewTicket />} />
         <Route path="ticketSubmitted" element={<AfterSubmission />} />
 

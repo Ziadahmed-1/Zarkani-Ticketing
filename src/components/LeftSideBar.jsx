@@ -77,7 +77,6 @@ function LeftSideBar({ isSidebarOpen }) {
         </ul>
       </div>
       <hr />
-
       <div className="block">
         <h5>Members</h5>
         <ul className="members">

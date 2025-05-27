@@ -7,6 +7,7 @@ html {
   margin: 0;
   padding: 0;
   font-family: "Inter", sans-serif;
+  transition: all 0.4s ease;
 }
 
 :root {
@@ -16,7 +17,8 @@ html {
   --color-accent: #22c55e; /* Green-500 */
 
   /* Base */
-  --color-bg: #f9fafb; /* Gray-50 */
+  --color-bg: #f4f6f8; /* Gray-50 */
+  --color-body-bg: #f3f4f6; /* Gray-100 */
   --color-bg-alt: #ffffff; /* White */
   --color-text: #1f2937; /* Gray-800 */
   --color-muted: #6b7280; /* Gray-500 */
@@ -71,14 +73,19 @@ p {
   --color-accent: #4ade80;
 
   --color-bg: #111827; /* Gray-900 */
+  --color-body-bg: #1f2937; /* Gray-800 */
   --color-bg-alt: #1f2937; /* Gray-800 */
-  --color-text: #f3f4f6; /* Gray-100 */
+  --color-text: #dddddd; /* Gray-100 */
   --color-muted: #9ca3af;
 
   --color-border: #374151;
   --color-shadow: rgba(0, 0, 0, 0.3);
   --color-danger: #f87171;
   --color-warning: #fde047;
+}
+
+body {
+  color: var(--color-text);
 }
 
 .nav-bar {
@@ -91,7 +98,8 @@ p {
   background-color: var(--color-bg);
   border-bottom: 1px solid var(--color-border);
 
-  & .left {
+  & .left,
+  .right {
     display: flex;
     align-items: center;
     gap: 10px;
@@ -200,6 +208,7 @@ p {
   height: calc(100vh - 60px);
   overflow-y: auto;
   padding: 20px;
+  background-color: var(--color-bg-alt);
 }
 
 .nav-links {
@@ -214,6 +223,7 @@ p {
     padding: 10px;
     gap: 10px;
     cursor: pointer;
+    border: 1px solid transparent;
 
     /* transition: background-color 0.2s, color 0.2s, border-color 0.2s,
       box-shadow 0.2s; */
@@ -222,17 +232,19 @@ p {
   & .nav-link:hover {
     transform: translateX(5px);
     background-color: var(--color-bg);
-    /* border: 1px solid var(--color-border); */
+    border: 1px solid var(--color-border);
     box-shadow: 0 2px 4px var(--color-shadow);
     border-radius: 10px;
     transition: all 0.4s ease;
   }
 
   & .nav-link.active {
+    transform: translateX(5px);
     background-color: var(--color-bg);
-    /* border: 1px solid var(--color-border); */
+    border: 1px solid var(--color-border);
     box-shadow: 0 2px 4px var(--color-shadow);
     border-radius: 10px;
+    transition: all 0.4s ease;
   }
 }
 

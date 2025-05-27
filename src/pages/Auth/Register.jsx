@@ -1,18 +1,57 @@
 import TextComponent from "@/components/ui/TextComponent";
+import Toast from "@/components/ui/Toast";
+import Mutations from "@/Helpers/Mutations";
 import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router";
+import { useForm } from "react-hook-form";
 
 function Register() {
   const navigate = useNavigate();
+  const [toast, setToast] = useState({
+    open: false,
+    message: "",
+    severity: "success",
+  });
+  const { registerMutation } = Mutations();
   const [formData, setFormData] = useState({
+    name: "",
     email: "",
     password: "",
   });
 
-  const handleRegister = () => {};
+  function validateUser(data) {
+    const validName = data.name && data.name.trim().length > 0;
+    const validEmail = data.email && data.email.includes("@");
+    const validPassword = data.password && data.password.length >= 6;
+    return validName && validEmail && validPassword;
+  }
+
+  function handleRegister() {
+    if (!validateUser(formData)) {
+      setToast({
+        open: true,
+        message: "Please fill all the fields correctly",
+        severity: "error",
+      });
+      return;
+    }
+    registerMutation.mutate({
+      userName: formData.name,
+      password: formData.password,
+      email: formData.email,
+    });
+  }
   return (
     <div className="auth-card">
       <h3>Register</h3>
+      <div className="block">
+        <label>Name</label>
+        <TextComponent
+          type="name"
+          value={formData.name}
+          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+        />
+      </div>
       <div className="block">
         <label>Email</label>
         <TextComponent
@@ -38,6 +77,12 @@ function Register() {
       <NavLink className="auth-link" to="/auth/login">
         Have an account?
       </NavLink>
+      <Toast
+        open={toast.open}
+        message={toast.message}
+        severity={toast.severity}
+        onClose={() => setToast({ open: false, message: "", severity: "" })}
+      />
     </div>
   );
 }

@@ -2,9 +2,10 @@ import ImageUploader from "@/components/ImageUploader";
 import TextComponent from "@/components/ui/TextComponent";
 import Toast from "@/components/ui/Toast";
 import React, { useState } from "react";
-import { useSearchParams } from "react-router";
+import { useNavigate, useSearchParams } from "react-router";
 
 function NewTicket() {
+  const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const [toast, setToast] = useState({
     open: false,
@@ -26,11 +27,12 @@ function NewTicket() {
   });
 
   function handleSubmit() {
-    setToast({
-      open: true,
-      message: "Ticket created successfully",
-      severity: "success",
-    });
+    // setToast({
+    //   open: true,
+    //   message: "Ticket created successfully",
+    //   severity: "success",
+    // });
+    navigate("/ticketSubmitted");
   }
 
   return (
@@ -51,7 +53,7 @@ function NewTicket() {
           type="text"
           value={formData.description}
           multiline
-          height={"80px"}
+          height="80px"
           onChange={(e) =>
             setFormData({ ...formData, description: e.target.value })
           }
