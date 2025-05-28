@@ -4,17 +4,17 @@ import React from "react";
 import { Outlet } from "react-router";
 
 function AuthLayout() {
-  const authToast = useUIStore((state) => state.authToast);
-  const setAuthToast = useUIStore((state) => state.setAuthToast);
+  const glbToast = useUIStore((state) => state.glbToast);
+  const setGlbToast = useUIStore((state) => state.setGlbToast);
   return (
     <div>
       <Outlet />
-      <Toast
-        open={authToast.open}
-        message={authToast.message}
-        severity={authToast.severity}
-        onClose={() => setAuthToast({ open: false, message: "", severity: "" })}
-      />
+      {/* <Toast
+        open={glbToast.open}
+        message={glbToast.message}
+        severity={glbToast.severity}
+        onClose={() => setGlbToast({ open: false, message: "", severity: "" })}
+      /> */}
     </div>
   );
 }

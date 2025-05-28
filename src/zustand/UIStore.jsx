@@ -5,12 +5,12 @@ const useUIStore = create((set) => ({
   isSidebarOpen: true,
   isDarkMode: false,
   ticketsFilter: {
-    status: "All",
-    sort: "Newest",
+    status: {},
+    sort: {},
   },
-  project: null,
-  branch: null,
-  authToast: {
+  selectedProject: null,
+  selectedBranch: null,
+  glbToast: {
     open: false,
     message: "",
     severity: "",
@@ -29,9 +29,9 @@ const useUIStore = create((set) => ({
       return { isDarkMode: newMode };
     }),
   setTicketsFilter: (filter) => set(() => ({ ticketsFilter: filter })),
-  setProject: (project) => set(() => ({ project })),
-  setBranch: (branch) => set(() => ({ branch })),
-  setAuthToast: (toast) => set(() => ({ authToast: toast })),
+  setSelectedProject: (selectedProject) => set(() => ({ selectedProject })),
+  setSelectedBranch: (selectedBranch) => set(() => ({ selectedBranch })),
+  setGlbToast: (toast) => set(() => ({ glbToast: toast })),
   setAuthUser: (user) => set(() => ({ authUser: user })),
 }));
 

@@ -1,10 +1,12 @@
 import ImageUploader from "@/components/ImageUploader";
 import TextComponent from "@/components/ui/TextComponent";
 import Toast from "@/components/ui/Toast";
+import Mutations from "@/Helpers/Mutations";
 import React, { useState } from "react";
 import { useNavigate, useSearchParams } from "react-router";
 
 function NewTicket() {
+  const { newTicketMutation } = Mutations();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const [toast, setToast] = useState({
@@ -26,13 +28,45 @@ function NewTicket() {
     description: "",
   });
 
+  function ValidateNewTicket() {
+    if (!formData?.title?.trim()) {
+      return setToast({
+        open: true,
+        message: "Ticket title is required",
+        severity: "error",
+      });
+    }
+
+    if (!formData?.description.trim()) {
+      return setToast({
+        open: true,
+        message: "Ticket description is required",
+        severity: "error",
+      });
+    }
+    if (!images.length) {
+      return setToast({
+        open: true,
+        message: "You have to upload at least one image",
+        severity: "error",
+      });
+    }
+    return true;
+  }
+
   function handleSubmit() {
-    // setToast({
-    //   open: true,
-    //   message: "Ticket created successfully",
-    //   severity: "success",
-    // });
-    navigate("/ticketSubmitted");
+    if (ValidateNewTicket()) {
+      const data = {
+        tiketProjectId: formData.project || 1,
+        tiketBranchId: formData.branch || 1,
+        tiketUserName: formData.name || "Ziad ahmed",
+        tiketUserMobile: formData.phone || "01212",
+        tiketUserEmail: formData.email || "WYl5R@example.com",
+        tiketHeader: formData.title,
+        tiketBody: formData.description,
+      };
+      newTicketMutation.mutate(data);
+    }
   }
 
   return (

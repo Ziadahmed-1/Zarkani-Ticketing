@@ -7,7 +7,7 @@ html {
   margin: 0;
   padding: 0;
   font-family: "Inter", sans-serif;
-  transition: all 0.4s ease;
+  /* transition: all 0.4s ease; */
 }
 
 :root {
@@ -110,18 +110,22 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.5rem 1rem;
-  border-radius: 0.5rem;
+  padding: 0.625rem 1.25rem; /* Slightly more generous padding */
+  border-radius: 0.75rem; /* More rounded for modern feel */
   font-size: var(--font-sm);
-  font-weight: 500;
-  line-height: 1.25rem;
+  font-weight: 600;
+  line-height: 1.5;
   color: var(--color-bg-alt);
   background-color: var(--color-primary);
-  border: 1px solid var(--color-border);
-  box-shadow: 0 1px 2px var(--color-shadow);
-  transition: background-color 0.2s, color 0.2s, border-color 0.2s,
-    box-shadow 0.2s;
+  border: 1px solid transparent;
+  box-shadow: 0 4px 6px -1px var(--color-shadow),
+    0 2px 4px -2px var(--color-shadow);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease,
+    transform 0.2s ease;
+
   cursor: pointer;
+  text-decoration: none;
+  user-select: none;
 }
 
 .sec-btn {
@@ -162,7 +166,19 @@ body {
 
 .glb-btn:hover {
   background-color: var(--color-primary-hover);
-  border-color: var(--color-primary-hover);
+  box-shadow: 0 6px 10px -2px var(--color-shadow),
+    0 3px 6px -2px var(--color-shadow);
+  transform: translateY(-2px);
+}
+
+.glb-btn:focus {
+  outline: 2px solid var(--color-primary-hover);
+  outline-offset: 2px;
+}
+
+.glb-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px -2px var(--color-shadow);
 }
 
 .glb-btn:disabled {
@@ -286,6 +302,7 @@ body {
   padding: 10px;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   gap: 3px;
   background-color: var(--color-bg);
   border: 1px solid var(--color-border);
@@ -300,6 +317,14 @@ body {
     font-size: 14px;
   }
 
+  .footer {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    font-size: 14px;
+  }
+
   .status {
     padding: 2px 10px;
     border-radius: 10px;
@@ -309,6 +334,7 @@ body {
   .body {
     display: flex;
     flex-direction: column;
+    height: 100%;
     margin: 5px 0;
     gap: 10px;
     font-size: 14px;

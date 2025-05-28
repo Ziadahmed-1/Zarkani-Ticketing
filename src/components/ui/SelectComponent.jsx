@@ -4,16 +4,19 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+import useUIStore from "@/zustand/UIStore";
 
-function SelectComponent({ value, onChange, options }) {
+function SelectComponent({ value, onChange, options = [], label, id }) {
+  const ticketsFilter = useUIStore((state) => state.ticketsFilter);
+  console.log("selected value", value);
+  console.log("filters", ticketsFilter);
+
   return (
     <FormControl fullWidth>
-      {/* <InputLabel id="demo-simple-select-label">{label || "Select"}</InputLabel> */}
       <Select
         labelId="demo-simple-select-label"
         id="demo-simple-select"
         value={value}
-        //label={label || "Select"}
         onChange={onChange}
         sx={{
           height: "40px",
@@ -21,10 +24,12 @@ function SelectComponent({ value, onChange, options }) {
           fontSize: "14px",
           backgroundColor: "white",
         }}
+        // Tell MUI how to compare option with value (important for objects)
+        isOptionEqualToValue={(option, val) => option?.[id] === val?.[id]}
       >
         {options?.map((option) => (
-          <MenuItem key={option} sx={{ fontSize: "14px" }} value={option}>
-            {option}
+          <MenuItem key={option?.[id]} sx={{ fontSize: "14px" }} value={option}>
+            {option?.[label]}
           </MenuItem>
         ))}
       </Select>

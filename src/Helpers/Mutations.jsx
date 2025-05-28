@@ -1,29 +1,30 @@
-import { LoginUser, LogoutUser, RegisterUser } from "@/API/API";
+import { LoginUser, LogoutUser, RegisterUser } from "@/API/AuthAPI";
 import Register from "@/pages/Auth/Register";
 import useUIStore from "@/zustand/UIStore";
 import { useMutation } from "@tanstack/react-query";
+import RemoveAuthUser from "./RemoveAuthUser";
+import { AddNewTicket } from "@/API/MainAPI";
 
 function Mutations() {
-  const setAuthUser = useUIStore((state) => state.setAuthUser);
-  const setAuthToast = useUIStore((state) => state.setAuthToast);
+  const setGlbToast = useUIStore((state) => state.setGlbToast);
 
   const registerMutation = useMutation({
     mutationKey: ["register"],
     mutationFn: (data) => RegisterUser(data),
     onSuccess: (data) => {
       console.log("Success data:", data);
-      setAuthToast({
+      setGlbToast({
         open: true,
         message: "User registered successfully",
         severity: "success",
       });
       setTimeout(() => {
         window.location.href = "/auth/login";
-      }, 2000);
+      }, 1000);
     },
     onError: (error) => {
       console.log("Error caught by mutation:", error);
-      setAuthToast({
+      setGlbToast({
         open: true,
         message: "Something went wrong",
         severity: "error",
@@ -35,7 +36,7 @@ function Mutations() {
     mutationKey: ["login"],
     mutationFn: (data) => LoginUser(data),
     onSuccess: (data) => {
-      setAuthToast({
+      setGlbToast({
         open: true,
         message: "User logged in successfully",
         severity: "success",
@@ -44,32 +45,11 @@ function Mutations() {
       localStorage.setItem("user", JSON.stringify(data));
       setTimeout(() => {
         window.location.href = "/";
-      }, 2000);
+      }, 1000);
     },
     onError: (error) => {
       console.log("Error caught by mutation:", error);
-      setAuthToast({
-        open: true,
-        message: "Something went wrong",
-        severity: "error",
-      });
-    },
-  });
-  const logoutMutation = useMutation({
-    mutationKey: ["logout"],
-    mutationFn: () => LogoutUser(),
-    onSuccess: (data) => {
-      setAuthToast({
-        open: true,
-        message: "User Logged out successfully",
-        severity: "success",
-      });
-      localStorage.removeItem("user");
-      setAuthUser(null);
-    },
-    onError: (error) => {
-      console.log("Error caught by mutation:", error);
-      setAuthToast({
+      setGlbToast({
         open: true,
         message: "Something went wrong",
         severity: "error",
@@ -77,7 +57,49 @@ function Mutations() {
     },
   });
 
-  return { registerMutation, loginMutation, logoutMutation };
+  const logoutMutation = useMutation({
+    mutationKey: ["logout"],
+    mutationFn: () => LogoutUser(),
+    onSuccess: (data) => {
+      setGlbToast({
+        open: true,
+        message: "User Logged out successfully",
+        severity: "success",
+      });
+      RemoveAuthUser();
+    },
+    onError: (error) => {
+      console.log("Error caught by mutation:", error);
+      setGlbToast({
+        open: true,
+        message: "Something went wrong",
+        severity: "error",
+      });
+    },
+  });
+
+  const newTicketMutation = useMutation({
+    mutationKey: ["newTicket"],
+    mutationFn: (data) => AddNewTicket(data),
+    onSuccess: () => {
+      setGlbToast({
+        open: true,
+        message: "Your ticket has been submitted",
+        severity: "success",
+      });
+      //RemoveAuthUser();
+    },
+    onError: (error) => {
+      console.log("Error caught by mutation:", error);
+      setGlbToast({
+        open: true,
+        message: "Something went wrong",
+        severity: "error",
+      });
+    },
+  });
+
+  return { registerMutation, loginMutation, logoutMutation, newTicketMutation };
 }
 
 export default Mutations;
